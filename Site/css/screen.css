@@ -1,0 +1,721 @@
+/*------------------------------------*\
+#Variables
+\*------------------------------------*/
+
+:root {
+    /* Global colors */
+
+    --global-color-neutral-x-light: #F5F6FA;
+    --global-color-neutral-light: #E2E3E7;
+    --global-color-neutral: #8b8c9a;
+    --global-color-neutral-dark: #757787;
+    --global-color-neutral-x-dark: #7D7D7D;
+    --global-color-neutral-xx-dark: #333333;
+
+    --global-color-error: crimson;
+    --global-input-error-borderColor: crimson;
+
+    /* global page settings */
+    --global-html-color: var(--global-color-neutral-xx-dark);
+    --global-html-backgroundColor: #EEEEEE;
+    --global-selection-backgroundColor: #840000;    
+
+    /* borders */
+    --global-borderRadius: 3px;
+    --global-borderWidth: 1px;
+
+    /* transitions */
+    --global-transitionTiming-alpha: .1s ease-out;
+
+    /* Baseline settings */
+    --global-baseline: 8px;         
+    --global-whitespace: calc(var(--global-baseline) * 3); /* = 24px */
+
+    --global-whitespace-xs: calc(var(--global-baseline) / 2); /* = 4px */
+    --global-whitespace-sm: calc(var(--global-baseline) * 1); /*  = 8px */
+    --global-whitespace-md: calc(var(--global-baseline) * 2); /*  = 16px */
+    --global-whitespace-lg: calc(var(--global-baseline) * 4); /*  = 32px */
+    --global-whitespace-xl: calc(var(--global-whitespace) * 2); /*  = 48px */
+    --global-whitespace-xxl: calc(var(--global-whitespace) * 3); /*  = 72px */
+
+
+    /*font-size*/
+    --global-fontsize: 16px;
+    --global-fontsize-small: 14px;
+    --global-fontsize-large: 20px;
+}
+
+/*------------------------------------*\
+#GENERIC
+\*------------------------------------*/
+
+/*
+    Generic: Page
+    ---
+    Global page styles + universal box-sizing:
+*/
+
+html{
+    color: var(--global-html-color);
+    font-size: var(--global-fontsize);
+    line-height: 1.5;
+    font-family: "din-2014", Helvetica, arial, sans-serif;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.html-mainpage {
+    background-color: var(--global-html-backgroundColor);
+    background-image: url("../img/backgroundmain.png");
+    background-repeat: no-repeat;
+
+}
+.html-landingspagina {
+    background-color: var(--global-html-backgroundColor);
+    background-image: url("../img/backgroundlandings.png");
+    background-repeat: no-repeat;
+}
+
+a{
+    text-decoration: none;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+/*
+* Remove text-shadow in selection highlight:
+* https://twitter.com/miketaylr/status/12228805301
+*
+* Customize the background color to match your design.
+*/
+
+::-moz-selection {
+    background: var(--global-selection-backgroundColor);
+    color: white;
+    text-shadow: none;
+}
+
+::selection {
+    background: var(--global-selection-backgroundColor);
+    color: white;
+    text-shadow: none;
+}
+
+/*
+    Generic: Grid layout
+    ---
+    Global grid styles:
+*/
+
+.c-grid {
+    display: grid;
+    grid-gap: 1rem; 
+    /* web */
+    grid-template-areas: 'titel titel titel' 
+                         'countdown countdown countdown' 
+                         'circuit circuit circuit'
+                         'driver driver driver'
+                         'constructor constructor constructor';
+}
+
+.c-grid--item__titel{
+    grid-area: titel;
+    justify-self: center;
+}
+.c-grid--item__countdown{
+    grid-area: countdown;
+    justify-self: center;
+}
+.c-grid--item__circuit{
+    grid-area: circuit;
+    justify-self: center;
+    display:flex;
+    align-items: center;
+}
+
+.c-grid--item__driver-standings{
+    grid-area: driver;
+    justify-self: center;
+}
+.c-grid--item__constructor-standings{
+    grid-area: constructor;
+    justify-self: center;
+}
+
+.c-grid--landingspagina{
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-areas: 'titel' 
+                         'mockup'
+                         'informatie';
+}
+
+.c-grid--landingspagina__item-titel{
+    grid-area: titel;
+    justify-self: center;
+}
+.c-grid--landingspagina__item-informatie{
+    grid-area: informatie;
+    justify-self: center;
+}
+.c-grid--landingspagina__item-mockup{
+    grid-area: mockup;
+    justify-self: center; 
+}
+
+@media (min-width: 992px) {
+    .c-grid{
+        display: grid;
+        grid-gap: 1rem;
+        /* web */
+        grid-template-areas: 'titel titel titel titel titel' 
+                             'countdown countdown countdown countdown countdown'
+                             'circuit circuit circuit circuit circuit'
+                             'driver driver . constructor constructor';
+    }
+    .c-grid--item__driver-standings{
+        justify-self: right;
+    }
+    .c-grid--item__constructor-standings{
+        justify-self: left;
+    }
+
+    .c-grid--landingspagina{
+        display: grid;
+        grid-gap: 1rem; 
+        /* web */
+        grid-template-areas: 'titel titel' 
+                             'informatie mockup';
+    }
+    .c-grid--landingspagina__item-mockup{
+        justify-self: left; 
+        vertical-align: middle;
+    }
+    .c-grid--landingspagina__item-informatie{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        justify-self: right;
+    }
+}
+
+/*------------------------------------*\
+#OBJECTS
+\*------------------------------------*/
+
+/*
+    Objects: Row
+    ---
+    Creates a horizontal row that stretches the viewport and adds padding around children
+*/
+
+.o-row {
+    position: relative;
+    padding: var(--global-whitespace) var(--global-whitespace) 0;
+}
+
+
+.o-row--background{
+    text-align: center;
+    background: rgb(61,1,1);
+    background: linear-gradient(164deg, rgba(61,1,1,1) 0%, rgba(255,0,0,1) 100%);
+    color: var(--global-color-neutral-light);
+}
+
+/* size modifiers */
+
+.o-row--lg {
+    padding-top: var(--global-whitespace-xl);
+    padding-bottom: var(--global-whitespace);
+}
+
+.o-row--xl {
+    padding-top: var(--global-whitespace-xxl);
+    padding-bottom: var(--global-whitespace-xl);
+}
+
+@media (min-width: 768px) {
+    .o-row {
+        padding-left: var(--global-whitespace-xl);
+        padding-right: var(--global-whitespace-xl);
+    }
+}
+
+@media (min-width: 992px) {
+    .o-row--xl {
+        padding-top: 96px;
+        padding-bottom: var(--global-whitespace-xxl);
+    }
+}
+
+
+
+/*------------------------------------*\
+#Elements
+\*------------------------------------*/
+
+/*
+    Elements: typography
+    ---
+    Default markup for typographic elements
+*/
+
+h1,
+h2,
+h3 {
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 36px;
+    line-height: 48px;
+    margin: 0 0 var(--global-whitespace);
+}
+
+h2 {
+    font-size: 32px;
+    line-height: 40px;
+    margin: 0 0 var(--global-whitespace);
+}
+
+h3 {
+    font-size: 26px;
+    line-height: 32px;
+    margin: 0 0 var(--global-whitespace);
+    text-align: center;
+}
+
+h4,
+h5,
+h6 {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    margin: 0 0 var(--global-whitespace);
+}
+
+p,
+ol,
+ul,
+dl,
+table,
+address,
+figure {
+    margin: 0 0 var(--global-whitespace);
+}
+
+ul,
+ol {
+    padding-left: var(--global-whitespace);
+}
+
+li ul,
+li ol {
+    margin-bottom: 0;
+}
+
+blockquote {
+    font-style: normal;
+    font-size: 23px;
+    line-height: 32px;
+    margin: 0 0 var(--global-whitespace);
+}
+
+blockquote * {
+    font-size: inherit;
+    line-height: inherit;
+}
+
+figcaption {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    margin-top: var(--global-whitespace-sm);
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: LightGrey;
+    margin: 0 0 var(--global-whitespace);
+}
+
+a,
+a:visited {
+    transition: all var(--global-transitionTiming-alpha);
+    color: var(--global-color-alpha);
+    outline-color: var(--global-link-BoxShadowColor);
+    outline-width: medium;
+    outline-offset: 2px;
+}
+
+a:hover,
+a:focus {
+    color: var(--global-color-alpha-light);
+}
+
+a:active {
+    color: var(--global-color-alpha-dark);
+}
+
+label,
+input {
+    display: block;
+}
+
+select {
+    width: 100%;
+}
+
+input::placeholder {
+    color: var(--global-placeholder-color);
+}
+
+@media (min-width: 768px) {
+    h1 {
+        font-size: 18px;
+        line-height: 24px;
+        line-height: 50px;
+    }
+}
+@media (min-width: 992px) {
+    h1{
+        font-size: 12px;
+    }
+}
+
+/*------------------------------------*\
+#COMPONENTS
+\*------------------------------------*/
+
+/*
+    Component: title
+    ---
+    Class to put on all title and symbols
+    
+*/
+.c-title{
+    line-height: 32px;
+    margin: 0 0 var(--global-whitespace);
+    text-align: center;
+    font-weight: 600;
+    font-size: 2rem;
+    margin: 25px;
+    color: var(--global-color-neutral-x-light);
+}
+
+.c-title__symbol {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    fill: var(--global-color-neutral-x-light);
+}
+
+.c-title__symbol:hover {
+    height: 25px;
+}
+
+/*
+    Component: Image flag
+    ---
+    Class to put on images of flags
+    
+*/
+
+.c-circuit {
+    /*border: solid 1px var(--global-color-neutral-xxxx-light);*/
+    word-break: break-word;
+    display:flex;
+    align-items: center;
+}
+
+
+.c-circuit__img { 
+    max-width: 5.5em;
+    
+}
+
+.c-circuit__text{
+    margin: var(--global-whitespace-md);
+}
+
+.c-mockup__img{
+    max-width: 30em;
+}
+
+/*
+    Component: Table
+    ---
+    Class to put on all tables
+    
+*/
+
+.c-table{
+    display: flex;
+    text-align: left;
+    border-collapse: separate;
+    border-spacing: 0.5em 1em;
+}
+
+.c-table__position {
+    border-right: 1px solid black;
+    font-weight: 800;
+    font-size: var(--global-fontsize-large);
+    height: 50px;
+    text-align: left;
+    padding-right: 5px;
+}
+
+.c-table__name{
+    font-weight: 400;
+    color: var(--global-color-neutral-xx-dark);
+    padding-right: 100px;
+}
+
+.c-table__constructor{
+    font-weight: 400;
+    color: var(--global-color-neutral-x-dark);
+    font-size: var(--global-fontsize-small);
+}
+
+.c-table__points{
+    font-weight: 800;
+    font-size: var(--global-fontsize-large);
+}
+
+/*
+    Component: fake button
+    ---
+    Class to put on all fake buttons
+    
+*/
+.c-fake__button{
+    background-color: transparent;   
+    border: none;
+    cursor: pointer;
+}
+.c-fake__button:active{
+    border: 1px solid #E2E3E7;
+}
+
+/*
+    Component: fake button
+    ---
+    Class to put on all fake buttons
+    
+*/
+
+.c-label{
+    font-weight: 600;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.c-input{
+    display: inline-block;
+    width: 70%;
+    height: 2.5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    font-weight: 600;
+    border: none;
+    outline: none;
+}
+
+.c-button{
+    display: inline-block;
+    width: 30%;
+    height: 2.5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border: 1px;
+    background-color: #D40303;
+    color:white;
+    margin-left: -5px;
+    font-weight: 600;
+    outline: none;
+}
+
+.c-button:hover,
+.c-button:active{
+    background-color: #9B0A0A;
+}
+
+.c-input:hover{
+    border: solid 1px #e86c6c;
+}
+
+.c-button:focus,
+.c-input:focus{
+    
+}
+/*
+    Component: Countdown
+    ---
+    Class to put on all Countdowns
+    
+*/
+
+
+.c-countdown{
+    color: var(--global-color-neutral-x-light);
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.c-countdown__hours{
+    font-size: 4rem;
+    margin-right: 25px;
+    margin-left: 25px;
+    text-align: center;
+}
+
+.c-countdown__text{
+    font-size: 2rem;
+    text-align: center;
+}
+
+/*
+    Component: micro interaction
+    ---
+    Class to put on micro interaction
+    
+*/
+.js-interaction{
+    display: none;
+}
+
+.container-micro-interaction {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    justify-content: center;
+}
+  
+.cirkel1, .cirkel2 {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    background-color: #FFF;
+    opacity: 0.9;
+    position: absolute;
+    animation: cirkelanimatie 2.0s infinite;
+}
+  
+.cirkel2 {
+    animation-delay: -1.0s;
+}
+  
+@keyframes cirkelanimatie {
+    0% { 
+        transform: scale(0.0);
+    } 50% { 
+        transform: scale(1.0);
+    } 100% {
+        transform: scale(0.0); 
+    }
+}
+
+/*------------------------------------*\
+#MEDIA
+\*------------------------------------*/
+
+/*
+    Media Queries
+    ---
+    EXAMPLE Media Queries for Responsive Design.
+    These examples override the primary ('mobile first') styles.
+    USE THEM INLINE!
+*/
+
+/* Extra small devices (portrait phones, less than 576px)
+No media query since this is the default in mobile first design
+*/
+
+/* Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {}
+*/
+
+/* Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {}
+*/
+
+/* Large devices (landscape tablets, desktops, 992px and up)
+@media (min-width: 992px) {}
+*/
+
+/* Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {}
+*/
+
+/*
+    Print styles.
+    ---
+    Inlined to avoid the additional HTTP request:
+    http://www.phpied.com/delay-loading-your-print-css/
+*/
+
+@media print {
+    *,
+    *:before,
+    *:after {
+        background: transparent !important;
+        color: #000 !important;
+        /* Black prints faster:
+        http://www.sanbeiji.com/archives/953 */
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+    /*
+    * Don't show links that are fragment identifiers,
+    * or use the `javascript:` pseudo protocol
+    */
+    a[href^="#"]:after,
+    a[href^="javascript:"]:after {
+        content: "";
+    }
+    pre {
+        white-space: pre-wrap !important;
+    }
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+    /*
+    * Printing Tables:
+    * http://css-discuss.incutio.com/wiki/Printing_Tables
+    */
+    thead {
+        display: table-header-group;
+    }
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}
