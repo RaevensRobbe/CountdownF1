@@ -103,7 +103,7 @@ let showCurrentConstructorStandings = (queryResponse) => {
 
 const getRound = async(round) => {
         // Met de fetch API proberen we de data op te halen.
-        const data = await fetch(`http://ergast.com/api/f1/current/`+ round + `.json`)
+        const data = await fetch(`http://ergast.com/api/f1/2020/`+ round + `.json`)
 		.then (r => r.json())
 		.catch((err) => console.error("An error occured :", err));
         //console.log(data);
@@ -176,6 +176,6 @@ function listeners(round){
 
 document.addEventListener('DOMContentLoaded', function () {
     console.log('Script loaded!');
-    getRound("next");
+    getRound("17");
     calculateTime();
 });
