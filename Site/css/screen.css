@@ -26,6 +26,12 @@
 
     /* transitions */
     --global-transitionTiming-alpha: .1s ease-out;
+    --global-transitionEasing-out: ease-out;
+    --global-transitionEasing-out-cubic: cubic-bezier(0.22, 0.61, 0.36, 1);
+    --global-transitionDuration-alpha: .1s;
+    --global-transitionDuration-beta: .2s;
+    --global-transitionDuration-gamma: .3s;
+    
 
     /* Baseline settings */
     --global-baseline: 8px;         
@@ -43,6 +49,20 @@
     --global-fontsize: 16px;
     --global-fontsize-small: 14px;
     --global-fontsize-large: 20px;
+
+    /* forms */
+    --global-label-color: var(--global-color-neutral-xx-dark);
+    --global-placeholder-color: var(--global-color-neutral-dark);
+    --global-input-backgroundColor: White;
+    --global-input-color: var(--global-color-neutral-xxxx-dark);
+    --global-input-borderColor: var(--global-color-neutral-x-light);
+    --global-input-hover-borderColor:  #e45776;
+    --global-input-focus-borderColor:  #dd4364;
+    --global-input-active-borderColor:  #790606;
+    --global-input-error-borderColor:  #ff0000;
+    --global-input-focus-boxShadowSpread: 0 0 0 3px;
+    --global-input-focus-boxShadowColor: var(--global-color-alpha-x-transparent);
+    --global-input-error-boxShadowColor: var(--global-color-error-x-transparent);
 }
 
 /*------------------------------------*\
@@ -420,6 +440,12 @@ input::placeholder {
 .c-title__symbol:hover {
     height: 25px;
 }
+.c-title__datum{
+    display: block;
+    font-size: 1rem;
+    color: var(--global-color-neutral-light);
+    text-align: center;
+}
 
 /*
     Component: Image flag
@@ -511,21 +537,77 @@ input::placeholder {
     
 */
 
-.c-label{
-    font-weight: 600;
-    margin-top: 1em;
-    margin-bottom: 1em;
+/*
+    Component: Label
+    ---
+    Class to put on all form labels
+*/
+
+.c-label__email {
+    margin-bottom: 0;
+    font-size: 14px;
+    padding-bottom: var(--global-whitespace-sm);    
+    line-height: calc(var(--global-baseline) * 2);
+    color: var(--label-color, var(--global-label-color));
 }
 
-.c-input{
-    display: inline-block;
-    width: 70%;
-    height: 2.5rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
+.c-label--optio__emailn {
+    padding-bottom: 0;
+}
+
+.c-label__error-message__email {
     font-weight: 600;
-    border: none;
+	float: right;
+    display: none;
+    color: var(--global-color-error);
+}
+
+.c-label__error-message__email.is-visible {
+	display: block;
+}
+
+.c-label--floating__email {
+    position: absolute;
+    top: calc(var(--global-baseline) * 1.5);
+    left: var(--global-whitespace-sm);
+    padding: var(--global-whitespace-xs)  var(--global-whitespace-sm);
+    background-color: var(--label--floating-backgroundColor, var(--global-input-backgroundColor));
+    transition: transform var(--global-transitionDuration-alpha) var(--global-transitionEasing-out);
+    z-index: 1;
+    border-radius: var(--global-borderRadius);
+}
+
+.is-floating,
+.c-form-field:focus-within .c-label--floating {
+    transform: translateY(calc(var(--global-baseline) * -3))
+}/*
+.c-container__newsletter{
+    display: flex;
+}*/
+
+.c-input__email {
+    --input-transition: all var(--global-transitionDuration-alpha) var(--global-transitionEasing-out);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    display: inline-block;
+    height: 2.5rem;
+    appearance: none;
+    width: 70%;
+    color: var(--global-input-color);
+    font-family: inherit;
     outline: none;
+    border: none;
+    transition: var(--input-transition);
+}
+
+.c-input__email:hover{
+    border: solid 1px var(--global-input-hover-borderColor);
+}
+.c-input__email:focus{
+    border: solid 1px var(--global-input-focus-borderColor);
+}
+.c-input__email:active{
+    border: solid 1px var(--global-input-hover-borderColor);
 }
 
 .c-button{
@@ -547,14 +629,6 @@ input::placeholder {
     background-color: #9B0A0A;
 }
 
-.c-input:hover{
-    border: solid 1px #e86c6c;
-}
-
-.c-button:focus,
-.c-input:focus{
-    
-}
 /*
     Component: Countdown
     ---

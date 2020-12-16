@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/screen.css">
     <!-- din 2014 font style-->
     <link rel="stylesheet" href="https://use.typekit.net/adr4jyi.css">
+    <script defer src="script/validation.js"></script>
 
     <title>F1 Countdown</title>
 </head>
@@ -26,7 +27,16 @@
                         <label class="c-label" for="username">
                             Keep up to date with unexpected changes with our newsletter!
                         </label>
-                        <input class="c-input" type="email" placeholder="e.g. john@doe.com" required> <button class="c-button">Subscribe</button>
+                        <br>
+                        <label class="c-label__email js-email-label" for="username">
+                            Email address
+                            <span class="c-label__error-message__email js-email-error-message">
+                                This field is required
+                            </span>
+                        </label>
+
+                            <input class="c-input__email js-email-input" type="email" name="username" id="username" placeholder="e.g. john@doe.com" required> <button class="c-button js-sign-in-button">Subscribe</button>
+                        
                     </p>
                 </form> 
             </div>

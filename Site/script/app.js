@@ -29,10 +29,19 @@ let showCurrentRound = (queryResponse) => {
 
     let samengevoegde_datum = datum_string+"T"+tijd_string;
     datum = new Date(samengevoegde_datum);
+    let now = new Date();
+    console.log("date controle:" + now);
+    if(datum < now){
+        document.querySelector(".js-round-date").innerHTML = "Race passed on: " + datum_string;
+    } else {
+        document.querySelector(".js-round-date").innerHTML = "Race takes place on: " + datum_string;
+    }
+
 };
 
 let calculateTime = () => {
     console.log("date " + datum);
+
     setInterval(function(){
         let now = new Date();
     
@@ -156,9 +165,9 @@ const animation_interaction = function (){
 
 function listeners(round){
     let previous_race = document.querySelector('.js-button--previous'),
-        next_race = document.querySelector('.js-button--next'),
-        next_race_enter = document.querySelector('.js-button--next--enter'),
-        previous_race_enter = document.querySelector('.js-button--previous--enter');
+        next_race = document.querySelector('.js-button--next');
+        //next_race_enter = document.querySelector('.js-button--next--enter'),
+        //previous_race_enter = document.querySelector('.js-button--previous--enter');
 
         previous_race.addEventListener('click', function(){
             console.log("clicked");
