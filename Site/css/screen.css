@@ -157,6 +157,7 @@ a{
     justify-self: center;
     display:flex;
     align-items: center;
+    margin-top: 2rem;
 }
 
 .c-grid--item__driver-standings{
